@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="vi">
+    <head>
+        <link rel="stylesheet" href="css/style.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Ticket</title>
+        <script src="js/main.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script>
+        
+    </head>
+    <body>
+        <div class="flex-container">
+            <header >
+               <div class="left">
+                    <h1 class="item1">BOOK TICKETS</h1>
+                    <p class="item2">ALL CINEMA, THEATER AND OTHER EVENTS-RELATED WEBSITES THAT ENABLE BETTER ONLINE RESERVATION AND PAYMENT CAPABILITY WILL BENEFIT FROM OUR MOVIE TICKET BOOKING SYSTEM.THE ESSENTIAL CHARACTERISTICS OF THE MOVIE TICKET BOOKING SYSTEM ARE LISTED BELOW</p>
+               </div>
+               <div class="right">
+                    <button class="item3">BOOK NOW</button>
+               </div>
+               
+            </header>
+            <img  class="img4"src="/images/img4.png" alt="">
+            <div class="feature">
+                <div class="feature1">
+                    <h1 class="it1">OFFICIAL  <br><span class="it2">TRAILER</span></h1>
+                    <button class="item4">WATCH FULL VERSION</button>
+                </div>
+               
+                    <img class="img5"src="/images/img6.png" alt="">
+               
+            </div>
+           
+            <div class="form"  >
+                <form action="" id="registerForm" onsubmit = "return validateForm()">
+                    <div class="item5">
+                        <h1>REGISTER TO</h1>
+                    </div>
+                    <div class="item6">
+                        <h1>OUR NEWSLETTER</h1>
+                    </div>
+                    <div  class ="item7">
+                        <input  style="padding-right:60px;"type="text" placeholder="Type your Full Name here..." id ="name">
+                        
+                        
+                    </div>
+                    <div class ="item8">
+                    <input   style="padding-right:60px; "type="email" placeholder="Type your Email Address here..." id="email">
+    
+                    </div>
+                    <div class ="item9">
+                        <input  style="padding-right:60px;"  type="text" placeholder="Type your message here..." id ="message">
+                    </div>
+                    <div class="item10">
+                        <button  type ="submit" class="item10_1">CONFIRM</button>
+                    </div>
+                </form>
+              
+
+            </div>
+            <footer>
+                <div class="footer-main">
+                    <div class="column1">
+                        <p>FAQ</p>
+                        <p>Investor Relations</p>
+                        <p>Ways To Watch</p>
+                        <p>Corporate Information</p>
+                        <p>My Soul Premiere</p>
+                    </div>
+                    <div class="column2">
+                        <p>Help Centers</p>
+                        <p>Jobs</p>
+                        <p>Terms Of Use</p>
+                        <p>Contact us</p>
+                    </div>
+                    <div class="column3">
+                        <p>Account</p>
+                        <p>Redeem Gift Cards</p>
+                        <p>Privacy</p>
+                        <p>Speed Test</p>
+                    </div>
+                    <div class="column4">
+                        <p>Media Center</p>
+                        <p>Buy Gift Cards</p>
+                        <p>Cookie Preferences</p>
+                        <p>Legal Notices</p>
+                    </div>
+                </div>
+                <div class="social">
+                    <img src="/images/social.svg" alt="Social">
+                </div>
+                    
+                
+                
+            </footer>
+        </div>
+        <script>
+             // Kiem tra du lieu
+            function validateForm()  {
+                
+             var n = document.getElementById("name").value;
+             var e = document.getElementById("email").value;
+
+             if(n== "") {
+                 alert("Please enter your Username");
+                 return false;
+             }
+             if(e == "") {
+                 alert("Please enter your email");
+                 return false;
+             }
+
+             alert("All datas are valid!, send it to the server!")
+
+             return true;}
+            //Luu du lieu
+            const firebaseConfig = {
+                apiKey: "AIzaSyCCQkQjzWEvHX13HmAfHs1evZDnxpbNepc",
+                authDomain: "home-dcc81.firebaseapp.com",
+                databaseURL: "https://home-dcc81-default-rtdb.firebaseio.com",
+                projectId: "home-dcc81",
+                storageBucket: "home-dcc81.appspot.com",
+                messagingSenderId: "294044319452",
+                appId: "1:294044319452:web:77ba52036d8af50eb37e19",
+                measurementId: "G-JEW2LVTM6W"
+            };
+            
+
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig
+            );
+
+
+            var messagesRef = firebase.database()
+                        .ref('Collected Data');
+                    
+                    document.getElementById('registerForm')
+                        .addEventListener('submit', submitForm);
+            
+                    function submitForm(e) {
+                        e.preventDefault();
+                        // Get values
+                        var name = getInputVal('name');
+                        var email = getInputVal('email');
+                        var message = getInputVal ('message');
+            
+                        saveMessage(name, email, message);
+                        document.getElementById('registerForm').reset();
+                    }
+            // Function to get form values
+            function getInputVal(id) {
+                return document.getElementById(id).value;
+            }
+
+            // Save message to firebase
+            function saveMessage(name, email, message) {
+                var newMessageRef = messagesRef.push();
+                newMessageRef.set({
+                    name: name,
+                    email: email,
+                    message: message,
+                });
+            }
+                    </script>
+        
+    </body>
+</html>
